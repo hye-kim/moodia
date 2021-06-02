@@ -1,1 +1,27 @@
-/* TODO Add site wide styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Rubik:wght@300;400;500&display=swap");
+
+html {
+  --tw-bg-opacity: 1;
+  background-color: rgba(245, 246, 250, var(--tw-bg-opacity));
+  font-family: "Roboto", sans-serif;
+}
+
+.bg-highlight {
+  --tw-bg-opacity: 1;
+  background-color: rgba(93, 189, 210, var(--tw-bg-opacity));
+}
+
+.label {
+  top: 0%;
+  transform: translateY(-50%);
+  font-size: 14px;
+}
+
+.text-highlight {
+  color: rgba(93, 189, 210, var(--tw-bg-opacity));
+}
