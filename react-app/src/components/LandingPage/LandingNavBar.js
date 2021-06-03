@@ -15,13 +15,13 @@ const LandingNavBar = ({ user }) => {
           <>
             <NavLink
               to="/login"
-              className="transition duration-200 mr-2 md:mr-10 px-3 py-1.5 md:px-4 md:py-2 rounded-md bg-highlight text-white hover:opacity-50"
+              className="transition duration-200 mr-2 md:mr-10 px-3 py-1.5 md:px-4 md:py-2 rounded-3xl bg-highlight text-white hover:opacity-50"
             >
               Login
             </NavLink>
             <NavLink
               to="/signup"
-              className="transition duration-200 px-3 py-1.5 md:px-4 md:py-2 rounded-md bg-highlight text-white hover:opacity-50"
+              className="transition duration-200 px-3 py-1.5 md:px-4 md:py-2 rounded-3xl bg-highlight text-white hover:opacity-50"
             >
               Sign Up
             </NavLink>
@@ -31,7 +31,7 @@ const LandingNavBar = ({ user }) => {
           <>
             <NavLink
               to="/dashboard"
-              className="transition duration-200 mr-2 md:mr-10 px-3 py-1.5 md:px-4 md:py-2 rounded-md bg-highlight text-white hover:opacity-50"
+              className="transition duration-200 mr-2 md:mr-10 px-3 py-1.5 md:px-4 md:py-2 rounded-3xl bg-highlight text-white hover:opacity-50"
             >
               Dashboard
             </NavLink>

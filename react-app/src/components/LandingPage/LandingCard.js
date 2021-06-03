@@ -9,7 +9,7 @@ function LandingCard({ title, description, reverse, child }) {
         } md:flex-row items-center justify-around md:text-left text-xl font-light font-sans2 text-gray-500`}
       >
         <div className="max-w-md">
-          <h1 className="text-highlight-secondary my-5 text-5xl font-bold text-gray-700">
+          <h1 className="text-highlight my-5 text-5xl font-bold text-gray-700">
             {title}
           </h1>
           <p>{description}</p>
