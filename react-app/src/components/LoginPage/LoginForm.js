@@ -5,7 +5,7 @@ import { login } from "../../store/session";
 import { MailIconElement, LockIconElement } from "../Icons/Icons";
 
 const LoginForm = () => {
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.session.user);
@@ -34,11 +34,11 @@ const LoginForm = () => {
   return (
     <form onSubmit={onLogin}>
       <div className="relative mb-6">
-        {errors.map((error) => (
+        {/* {errors.map((error) => (
           <div className="text-red-500" key={`error-${error}`}>
             {error}
           </div>
-        ))}
+        ))} */}
       </div>
       <div className="relative mb-6">
         <input
@@ -54,6 +54,9 @@ const LoginForm = () => {
         >
           {MailIconElement} Email
         </label>
+        {errors.email && (
+          <div className="text-red-500 text-sm">{errors.email}</div>
+        )}
       </div>
       <div className="relative mb-6">
         <input
@@ -61,7 +64,7 @@ const LoginForm = () => {
           type="password"
           value={password}
           onChange={updatePassword}
-          className="appearance-none block w-full p-2.5 rounded-md border border-gray-300 placeholder-gray-400 focus:outline-none focus:border-highlight transition duration-150 ease-in-out sm:text-sm sm:leading-5 mb-5"
+          className="appearance-none block w-full p-2.5 rounded-md border border-gray-300 placeholder-gray-400 focus:outline-none focus:border-highlight transition duration-150 ease-in-out sm:text-sm sm:leading-5"
         />
         <label
           htmlFor="password"
@@ -69,19 +72,22 @@ const LoginForm = () => {
         >
           {LockIconElement} Password
         </label>
-        <button
-          type="submit"
-          className="transition duration-300 w-full px-5 py-2 rounded-lg text-light text-sm text-white rounded-sm bg-highlight border focus:outline-none"
-        >
-          Login
-        </button>
-        <p className="mt-5 text-sm">
-          Don't have an account?{" "}
-          <Link to="/signup" className="text-blue-500">
-            Sign up here
-          </Link>
-        </p>
+        {errors.password && (
+          <div className="text-red-500 text-sm">{errors.password}</div>
+        )}
       </div>
+      <button
+        type="submit"
+        className="transition duration-300 w-full px-5 py-2 rounded-lg text-light text-sm text-white rounded-sm bg-highlight border focus:outline-none"
+      >
+        Login
+      </button>
+      <p className="mt-5 text-sm">
+        Don't have an account?{" "}
+        <Link to="/signup" className="text-blue-500">
+          Sign up here
+        </Link>
+      </p>
     </form>
   );
 };

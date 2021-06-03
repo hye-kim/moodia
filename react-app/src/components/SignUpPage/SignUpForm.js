@@ -5,6 +5,7 @@ import { signUp } from "../../store/session";
 import { MailIconElement, LockIconElement } from "../Icons/Icons";
 
 const SignUpForm = () => {
+  const [errors, setErrors] = useState({});
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -15,8 +16,11 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
-    if (password === repeatPassword) {
-      await dispatch(signUp(firstName, lastName, email, password));
+    const data = await dispatch(
+      signUp(firstName, lastName, email, password, repeatPassword)
+    );
+    if (data.errors) {
+      setErrors(data.errors);
     }
   };
 
@@ -60,6 +64,9 @@ const SignUpForm = () => {
         >
           First Name
         </label>
+        {errors.first_name && (
+          <div className="text-red-500 text-sm">{errors.first_name}</div>
+        )}
       </div>
       <div className="relative mb-6">
         <input
@@ -75,6 +82,9 @@ const SignUpForm = () => {
         >
           Last Name
         </label>
+        {errors.last_name && (
+          <div className="text-red-500 text-sm">{errors.last_name}</div>
+        )}
       </div>
       <div className="relative mb-6">
         <input
@@ -90,6 +100,9 @@ const SignUpForm = () => {
         >
           {MailIconElement} Email
         </label>
+        {errors.email && (
+          <div className="text-red-500 text-sm">{errors.email}</div>
+        )}
       </div>
       <div className="relative mb-6">
         <input
@@ -100,11 +113,14 @@ const SignUpForm = () => {
           className="appearance-none block w-full p-2.5 rounded-md border border-gray-300 placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-highlight transition duration-150 ease-in-out sm:text-sm sm:leading-5"
         ></input>
         <label
-          htmlFor="email"
+          htmlFor="password"
           className="label absolute transition-all top-2.5 left-2 px-1 pointer-events-none bg-white text-xs"
         >
           {LockIconElement} Password
         </label>
+        {errors.password && (
+          <div className="text-red-500 text-sm">{errors.password}</div>
+        )}
       </div>
       <div className="relative mb-6">
         <input
@@ -112,15 +128,17 @@ const SignUpForm = () => {
           name="repeat_password"
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          required={true}
           className="appearance-none block w-full p-2.5 rounded-md border border-gray-300 placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-highlight transition duration-150 ease-in-out sm:text-sm sm:leading-5"
         ></input>
         <label
-          htmlFor="email"
+          htmlFor="repeat_password"
           className="label absolute transition-all top-2.5 left-2 px-1 pointer-events-none bg-white text-xs"
         >
           {LockIconElement} Confirm Password
         </label>
+        {errors.repeat_password && (
+          <div className="text-red-500 text-sm">{errors.repeat_password}</div>
+        )}
       </div>
       <button
         type="submit"
@@ -129,11 +147,11 @@ const SignUpForm = () => {
         Sign Up
       </button>
       <p className="mt-5 text-sm">
-          Already have an account?{" "}
-          <Link to="/login" className="text-blue-500">
-            Login here
-          </Link>
-        </p>
+        Already have an account?{" "}
+        <Link to="/login" className="text-blue-500">
+          Login here
+        </Link>
+      </p>
     </form>
   );
 };

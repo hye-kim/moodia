@@ -11,10 +11,9 @@ def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
     """
-    errorMessages = []
+    errorMessages = {}
     for field in validation_errors:
-        for error in validation_errors[field]:
-            errorMessages.append(f"{field} : {error}")
+        errorMessages[field] = validation_errors[field][0]
     return errorMessages
 
 
@@ -34,7 +33,6 @@ def login():
     Logs a user in
     """
     form = LoginForm()
-    print(request.get_json())
     # Get the csrf_token from the request cookie and put it into the
     # form manually to validate_on_submit can be used
     form["csrf_token"].data = request.cookies["csrf_token"]
@@ -62,7 +60,6 @@ def sign_up():
     """
     form = SignUpForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
-    print("================ TEST =============", form.data)
     if form.validate_on_submit():
         user = User(
             first_name=form.data["first_name"],
