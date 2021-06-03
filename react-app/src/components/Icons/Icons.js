@@ -1,5 +1,34 @@
 import Icon from "@mdi/react";
-import { mdiEmail, mdiLock } from "@mdi/js";
+import {
+  mdiEmail,
+  mdiLock,
+  mdiHome,
+  mdiCalendar,
+  mdiStar,
+  mdiImage,
+  mdiEmoticonOutline,
+  mdiEmoticonFrownOutline,
+  mdiEmoticonSadOutline,
+  mdiEmoticonNeutralOutline,
+  mdiEmoticonHappyOutline,
+  mdiEmoticonExcitedOutline,
+} from "@mdi/js";
+
+const emotes = [
+  mdiEmoticonFrownOutline,
+  mdiEmoticonSadOutline,
+  mdiEmoticonNeutralOutline,
+  mdiEmoticonOutline,
+  mdiEmoticonExcitedOutline,
+];
+
+const emoteColors = [
+  'emote-1',
+  'emote-2',
+  'emote-3',
+  'emote-4',
+  'emote-5',
+]
 
 export const MailIconElement = (
   <Icon
@@ -18,3 +47,49 @@ export const LockIconElement = (
     className="inline text-gray-500 mr-1"
   ></Icon>
 );
+
+export const HomeIconElement = (
+  <Icon path={mdiHome} title="Home" size={0.85} className="inline mr-2"></Icon>
+);
+
+export const StarIconElement = (
+  <Icon path={mdiStar} title="Star" size={0.85} className="inline mr-2"></Icon>
+);
+
+export const CalendarIconElement = (
+  <Icon
+    path={mdiCalendar}
+    title="Calendar"
+    size={0.85}
+    className="inline mr-2"
+  ></Icon>
+);
+
+export const ImageIconElement = (
+  <Icon
+    path={mdiImage}
+    title="Image"
+    size={0.85}
+    className="inline text-gray-500 mr-2"
+  ></Icon>
+);
+
+export const EmoticonIconElement = (
+  <Icon
+    path={mdiEmoticonHappyOutline}
+    title="Emoticon"
+    size={0.85}
+    className="inline text-gray-500 mr-2"
+  ></Icon>
+);
+
+export const emoteElements = emotes.map((ic, idx) => {
+  return (
+    <Icon
+      className={`fill-current inline text-${emoteColors[idx]} `}
+      key={idx}
+      path={ic}
+      size={1}
+    ></Icon>
+  );
+});

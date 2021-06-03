@@ -53,7 +53,7 @@ export const logout = () => async (dispatch) => {
     },
   });
 
-  const data = await response.json();
+  await response.json();
   dispatch(removeUser());
 };
 

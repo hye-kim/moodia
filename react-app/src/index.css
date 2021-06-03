@@ -11,17 +11,33 @@ html {
   font-family: "Roboto", sans-serif;
 }
 
-.bg-highlight {
-  --tw-bg-opacity: 1;
-  background-color: rgba(93, 189, 210, var(--tw-bg-opacity));
-}
-
 .label {
   top: 0%;
   transform: translateY(-50%);
   font-size: 14px;
 }
 
-.text-highlight {
-  color: rgba(93, 189, 210, var(--tw-bg-opacity));
+.text-emote-1 {
+  --tw-text-opacity: 1;
+  color: rgba(241, 91, 91, var(--tw-text-opacity));
+}
+
+.text-emote-2 {
+  --tw-text-opacity: 1;
+  color: rgba(255, 129, 5, var(--tw-text-opacity));
+}
+
+.text-emote-3 {
+  --tw-text-opacity: 1;
+  color: rgba(241, 172, 91, var(--tw-text-opacity));
+}
+
+.text-emote-4 {
+  --tw-text-opacity: 1;
+  color: rgba(135, 189, 16, var(--tw-text-opacity));
+}
+
+.text-emote-5 {
+  --tw-text-opacity: 1;
+  color: rgba(77, 132, 75, var(--tw-text-opacity));
 }
