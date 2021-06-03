@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import LoginForm from "./components/LoginPage/LoginForm";
-import SignUpForm from "./components/auth/SignUpForm";
+import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
 import User from "./components/User";
-import { authenticate } from "./services/auth";
 import LandingPage from "./components/LandingPage/LandingPage";
 import LoginPage from "./components/LoginPage/LoginPage";
+import { authenticate } from "./store/session";
+import SignUpPage from "./components/SignUpPage/SignUpPage";
 
 function App() {
-  const [authenticated, setAuthenticated] = useState(false);
+  const user = useSelector((state) => state.session.user);
   const [loaded, setLoaded] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
-      const user = await authenticate();
-      if (!user.errors) {
-        setAuthenticated(true);
-      }
+      await dispatch(authenticate());
       setLoaded(true);
     })();
-  }, []);
+  }, [dispatch]);
 
   if (!loaded) {
     return null;
@@ -31,33 +29,19 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/login" exact={true}>
-          <LoginPage
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          />
+          <LoginPage />
         </Route>
-        <Route path="/sign-up" exact={true}>
-          <SignUpForm
-            authenticated={authenticated}
-            setAuthenticated={setAuthenticated}
-          />
+        <Route path="/signup" exact={true}>
+          <SignUpPage />
         </Route>
-        <ProtectedRoute
-          path="/users"
-          exact={true}
-          authenticated={authenticated}
-        >
+        <ProtectedRoute path="/users" exact={true}>
           <UsersList />
         </ProtectedRoute>
-        <ProtectedRoute
-          path="/users/:userId"
-          exact={true}
-          authenticated={authenticated}
-        >
+        <ProtectedRoute path="/users/:userId" exact={true}>
           <User />
         </ProtectedRoute>
-        <Route path="/" exact={true} authenticated={authenticated}>
-          <LandingPage />
+        <Route path="/" exact={true}>
+          <LandingPage user={user} />
         </Route>
       </Switch>
     </BrowserRouter>

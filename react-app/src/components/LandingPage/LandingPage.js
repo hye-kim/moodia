@@ -5,11 +5,11 @@ import LandingNavBar from "./LandingNavBar";
 import moodImg from "../../images/landing-mood.png";
 import habitImg from "../../images/landing-habits.png";
 
-function LandingPage() {
+function LandingPage({ user }) {
   return (
     <div>
       <section className="flex flex-col items-center">
-        <LandingNavBar />
+        <LandingNavBar user={user} />
         <div className="flex flex-col items-center md:mt-10">
           <div className="my-10">
             <Jumbotron />
@@ -24,13 +24,13 @@ function LandingPage() {
         <LandingCard
           description="Simply enter how you feel and visualize how you've been."
           title="Track Your Mood"
-          child={<img src={moodImg} className="max-w-xs md:max-w-xl"></img>}
+          child={<img src={moodImg} alt="moods" className="max-w-xs md:max-w-xl"></img>}
         ></LandingCard>
         <LandingCard
           title="Plan Your Day"
           reverse={true}
           description="It's important to build good habits. Organize your morning and evening routines with Serenime."
-          child={<img src={habitImg} className="max-w-xs md:max-w-xl"></img>}
+          child={<img src={habitImg} alt="habits" className="max-w-xs md:max-w-xl"></img>}
         ></LandingCard>
       </section>
     </div>

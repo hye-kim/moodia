@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
-import { login } from "../../services/auth";
+import { login } from "../../store/session";
 import { MailIconElement, LockIconElement } from "../Icons/Icons";
 
-const LoginForm = ({ authenticated, setAuthenticated }) => {
+const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
 
   const onLogin = async (e) => {
     e.preventDefault();
-    const user = await login(email, password);
-    if (!user.errors) {
-      setAuthenticated(true);
-    } else {
-      setErrors(user.errors);
+    const data = await dispatch(login(email, password));
+    if (data.errors) {
+      setErrors(data.errors);
     }
   };
 
@@ -26,7 +27,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     setPassword(e.target.value);
   };
 
-  if (authenticated) {
+  if (user) {
     return <Redirect to="/" />;
   }
 
@@ -34,7 +35,9 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     <form onSubmit={onLogin}>
       <div className="relative mb-6">
         {errors.map((error) => (
-          <div className="text-red-500">{error}</div>
+          <div className="text-red-500" key={`error-${error}`}>
+            {error}
+          </div>
         ))}
       </div>
       <div className="relative mb-6">
@@ -47,9 +50,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
         />
         <label
           htmlFor="email"
-          className={
-            "label absolute transition-all top-2.5 left-2 px-1 pointer-events-none bg-white text-xs"
-          }
+          className="label absolute transition-all top-2.5 left-2 px-1 pointer-events-none bg-white text-xs"
         >
           {MailIconElement} Email
         </label>
@@ -76,10 +77,8 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
         </button>
         <p className="mt-5 text-sm">
           Don't have an account?{" "}
-          <Link to="/signup">
-            <a href="#" className="text-blue-500">
-              Sign Up here
-            </a>
+          <Link to="/signup" className="text-blue-500">
+            Sign up here
           </Link>
         </p>
       </div>

@@ -1,13 +1,21 @@
 import React from "react";
-import { logout } from "../../services/auth";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/session";
 
-const LogoutButton = ({setAuthenticated}) => {
+const LogoutButton = () => {
+  const dispatch = useDispatch();
   const onLogout = async (e) => {
-    await logout();
-    setAuthenticated(false);
+    dispatch(logout());
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return (
+    <button
+      onClick={onLogout}
+      className="transition duration-200 px-3 py-1.5 md:px-4 md:py-2 rounded-md bg-highlight text-white hover:opacity-50"
+    >
+      Logout
+    </button>
+  );
 };
 
 export default LogoutButton;
