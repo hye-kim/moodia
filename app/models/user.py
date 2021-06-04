@@ -13,10 +13,14 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     picture_url = db.Column(db.String(500))
 
-    moods = db.relationship("Mood", back_populates="user")
-    goals = db.relationship("Goal", back_populates="user")
-    habits = db.relationship("Habit", back_populates="user")
-    observations = db.relationship("Observation", back_populates="user")
+    moods = db.relationship("Mood", back_populates="user", cascade="all, delete-orphan")
+    goals = db.relationship("Goal", back_populates="user", cascade="all, delete-orphan")
+    habits = db.relationship(
+        "Habit", back_populates="user", cascade="all, delete-orphan"
+    )
+    observations = db.relationship(
+        "Observation", back_populates="user", cascade="all, delete-orphan"
+    )
 
     @property
     def password(self):

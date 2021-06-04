@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import moodiaJumbotron from "../../images/moodia-jumbotron.png";
-import Button from "../Elements/Button";
 import { login } from "../../store/session";
 import { useHistory } from "react-router";
 
@@ -26,7 +25,7 @@ function Jumbotron() {
       <div className="mt-6">
         <button
           onClick={handleDemo}
-          className="transition duration-200 mr-2 md:mr-10 px-3 py-1.5 md:px-4 md:py-2 rounded-3xl bg-highlight text-white hover:opacity-50"
+          className="transition duration-200 mr-2 md:mr-10 px-3 py-1.5 md:px-6 md:py-3 rounded-3xl bg-highlight text-white hover:opacity-50 focus:outline-none"
         >
           Demo Login
         </button>

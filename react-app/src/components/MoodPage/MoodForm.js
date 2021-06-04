@@ -1,14 +1,37 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createMood, changeMood } from "../../store/mood";
 import Button from "../Elements/Button";
 import MoodRadioInputs from "./MoodRadioInputs";
+import { deleteIconElement } from "../Icons/Icons";
 
-function MoodForm({ date }) {
+function MoodForm({ date, user, moodData }) {
   const [clicked, setClicked] = useState(null);
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("CLICKED IDX", clicked);
-    console.log("DATE", date)
+    const moodRating = clicked - 2;
+    const mood = {
+      date,
+      rating: moodRating,
+      userId: user.id,
+    };
+    dispatch(createMood(mood));
+  };
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    const moodRating = clicked - 2;
+    const moodId = moodData[date.getDate()]?.id;
+    const mood = {
+      date,
+      rating: moodRating,
+      userId: user.id,
+      id: moodId,
+    };
+
+    dispatch(changeMood(mood));
   };
 
   return (
@@ -22,12 +45,31 @@ function MoodForm({ date }) {
         </p>
         <MoodRadioInputs clicked={clicked} setClicked={setClicked} />
         <div className="flex justify-between w-1/2 mt-8">
-          <Button
-            text="Add"
-            textSize="xs"
-            bgColor="green-400"
-            hoverColor="green-200"
-          />
+          {!Object.keys(moodData)
+            .map((key) => Number(key))
+            .includes(date.getDate()) && (
+            <Button
+              text="Add"
+              textSize="xs"
+              bgColor="green-400"
+              hoverColor="green-200"
+            />
+          )}
+          {Object.keys(moodData)
+            .map((key) => Number(key))
+            .includes(date.getDate()) && (
+            <>
+              <Button
+                text="Edit"
+                textSize="xs"
+                bgColor="green-400"
+                hoverColor="green-200"
+                type="button"
+                onClick={handleEdit}
+              />
+              {deleteIconElement}
+            </>
+          )}
         </div>
       </form>
     </div>

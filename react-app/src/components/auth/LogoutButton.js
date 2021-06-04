@@ -11,7 +11,7 @@ const LogoutButton = () => {
   return (
     <button
       onClick={onLogout}
-      className="transition duration-200 px-3 py-1.5 md:px-4 md:py-2 rounded-3xl bg-highlight text-white hover:opacity-50"
+      className="transition duration-200 px-3 py-1.5 md:px-4 md:py-2 rounded-3xl bg-highlight text-white hover:opacity-50 focus:outline-none"
     >
       Logout
     </button>

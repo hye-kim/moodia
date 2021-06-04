@@ -6,6 +6,7 @@ import {
   mdiCalendar,
   mdiStar,
   mdiImage,
+  mdiDelete,
   mdiEmoticonOutline,
   mdiEmoticonFrownOutline,
   mdiEmoticonSadOutline,
@@ -22,13 +23,13 @@ const emotes = [
   mdiEmoticonExcitedOutline,
 ];
 
-const emoteColors = [
-  'emote-1',
-  'emote-2',
-  'emote-3',
-  'emote-4',
-  'emote-5',
-]
+export const emoteColors = [
+  "emote-1",
+  "emote-2",
+  "emote-3",
+  "emote-4",
+  "emote-5",
+];
 
 export const MailIconElement = (
   <Icon
@@ -93,3 +94,12 @@ export const emoteElements = emotes.map((ic, idx) => {
     ></Icon>
   );
 });
+
+export const deleteIconElement = (
+  <Icon
+    path={mdiDelete}
+    title="delete"
+    size={0.95}
+    className="transition duration-200 text-gray-500 hover:text-red-500 cursor-pointer"
+  ></Icon>
+);

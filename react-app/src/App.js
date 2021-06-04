@@ -49,7 +49,7 @@ function App() {
             <div className="flex flex-col md:flex-row md:justify-between w-full lg:w-5/6 md:m-0">
               <Sidebar />
               <ProtectedRoute path="/dashboard/moods" exact={true}>
-                <MoodPage />
+                <MoodPage user={user} />
               </ProtectedRoute>
             </div>
           </div>
