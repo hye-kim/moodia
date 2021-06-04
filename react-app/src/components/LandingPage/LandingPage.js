@@ -29,7 +29,7 @@ function LandingPage({ user }) {
         <LandingCard
           title="Plan Your Day"
           reverse={true}
-          description="It's important to build good habits. Organize your morning and evening routines with Serenime."
+          description="It's important to build good habits. Organize your morning and evening routines with Moodia."
           child={<img src={habitImg} alt="habits" className="max-w-xs md:max-w-xl"></img>}
         ></LandingCard>
       </section>

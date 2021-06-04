@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createMood, changeMood } from "../../store/mood";
 import Button from "../Elements/Button";
@@ -8,6 +8,14 @@ import { deleteIconElement } from "../Icons/Icons";
 function MoodForm({ date, user, moodData }) {
   const [clicked, setClicked] = useState(null);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    Object.keys(moodData)
+      .map((key) => Number(key))
+      .includes(date.getDate())
+      ? setClicked(moodData[date.getDate()].rating + 2)
+      : setClicked(null);
+  }, [date, moodData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
