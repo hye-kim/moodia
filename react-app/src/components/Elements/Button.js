@@ -15,7 +15,7 @@ function Button({
     <button
       className={` transition duration-300 ${
         full && "w-full"
-      } px-5 py-2 rounded-lg text-light text-${textSize ? textSize : "sm"} ${
+      } px-5 py-2 rounded-3xl text-light text-${textSize ? textSize : "sm"} ${
         textColor ? `text-${textColor}` : "text-white"
       } hover:bg-${hoverColor} rounded-sm ${
         bgColor ? `bg-${bgColor}` : "bg-highlight"

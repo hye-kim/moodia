@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Button from "../Elements/Button";
 import MoodRadioInputs from "./MoodRadioInputs";
 
-function MoodForm() {
+function MoodForm({ date }) {
   const [clicked, setClicked] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(clicked)
+    console.log("CLICKED IDX", clicked);
+    console.log("DATE", date)
   };
 
   return (

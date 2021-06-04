@@ -1,7 +1,19 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import moodiaJumbotron from "../../images/moodia-jumbotron.png";
+import Button from "../Elements/Button";
+import { login } from "../../store/session";
+import { useHistory } from "react-router";
 
 function Jumbotron() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleDemo = async () => {
+    await dispatch(login("demo@aa.io", "password"));
+    history.push("/dashboard");
+  };
+
   return (
     <div className="text-center">
       <img src={moodiaJumbotron} alt="cow" className="m-auto h-80" />
@@ -11,6 +23,14 @@ function Jumbotron() {
       <h2 className="text-xl md:text-2xl text-gray-500">
         A site to visualize your mood, record your goals, and track your habits.
       </h2>
+      <div className="mt-6">
+        <button
+          onClick={handleDemo}
+          className="transition duration-200 mr-2 md:mr-10 px-3 py-1.5 md:px-4 md:py-2 rounded-3xl bg-highlight text-white hover:opacity-50"
+        >
+          Demo Login
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import CalendarDay from "./CalendarDay";
 
-function Calendar() {
+function Calendar({ date, setDate }) {
   // const moodData
-  const [date, setDate] = useState(new Date());
 
   const daysPerMonth = [
     31,
@@ -26,12 +25,17 @@ function Calendar() {
 
   const startMonth = new Date(date.getFullYear(), date.getMonth(), 1);
   const calendarItems = [];
-  for (let i = 0; i <= daysPerMonth[startMonth.getMonth()] + startMonth.getDay() - 1; i++) {
+  for (
+    let i = 0;
+    i <= daysPerMonth[startMonth.getMonth()] + startMonth.getDay() - 1;
+    i++
+  ) {
     if (i < startMonth.getDay()) {
       calendarItems.push(<div key={i}></div>);
     } else {
       const calendarPos = i - startMonth.getDay() + 1;
       const c = "white";
+      //TODO: EDIT COLOR BASED ON MOOD DATA FROM DB
       calendarItems.push(
         <CalendarDay
           key={i}
