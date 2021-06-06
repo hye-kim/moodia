@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { createMood, changeMood } from "../../store/mood";
+import { createMood, changeMood, removeMood } from "../../store/mood";
 import Button from "../Elements/Button";
 import MoodRadioInputs from "./MoodRadioInputs";
 import { deleteIconElement } from "../Icons/Icons";
@@ -42,6 +42,19 @@ function MoodForm({ date, user, moodData }) {
     dispatch(changeMood(mood));
   };
 
+  const handleDelete = (e) => {
+    e.preventDefault();
+    const moodId = moodData[date.getDate()]?.id;
+    const moodRating = clicked - 2;
+    const mood = {
+      date,
+      rating: moodRating,
+      userId: user.id,
+      id: moodId,
+    };
+    dispatch(removeMood(mood));
+  };
+
   return (
     <div className="flex flex-col items-center w-full mt-12">
       <form
@@ -75,7 +88,7 @@ function MoodForm({ date, user, moodData }) {
                 type="button"
                 onClick={handleEdit}
               />
-              {deleteIconElement}
+              <div onClick={handleDelete}>{deleteIconElement}</div>
             </>
           )}
         </div>
