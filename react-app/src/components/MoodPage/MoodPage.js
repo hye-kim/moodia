@@ -5,6 +5,7 @@ import { Zoom } from "react-awesome-reveal";
 import MoodForm from "./MoodForm";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMoods } from "../../store/mood";
+import MoodGraph from "./MoodGraph";
 
 function MoodPage({ user }) {
   const [date, setDate] = useState(new Date());
@@ -24,6 +25,7 @@ function MoodPage({ user }) {
           <PageHeading title={"Track your mood"} />
           <Zoom duration={500}>
             <Calendar date={date} setDate={setDate} moodData={moods} />
+            <MoodGraph date={date} moodData={moods} />
           </Zoom>
         </div>
       </div>
