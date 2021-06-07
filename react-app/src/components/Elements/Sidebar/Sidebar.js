@@ -31,7 +31,7 @@ function Sidebar() {
           <SidebarItem url="routines">
             {CalendarIconElement} Habits
           </SidebarItem>
-          <SidebarItem url="picture">
+          <SidebarItem url="observations">
             {ImageIconElement} Observations
           </SidebarItem>
         </ul>

@@ -7,6 +7,9 @@ module.exports = {
         highlight: {
           DEFAULT: "#5DBDD2"
         },
+        normal: {
+          DEFAULT: "#55d681"
+        },
         emote: {
           1: "#f15b5b",
           2: "#ff8105",

@@ -17,27 +17,11 @@ html {
   font-size: 14px;
 }
 
-.text-emote-1 {
-  --tw-text-opacity: 1;
-  color: rgba(241, 91, 91, var(--tw-text-opacity));
+.ReactModal__Html--open,
+.ReactModal__Body--open {
+  overflow: hidden; /* prevents background page from scrolling when the modal is open */
 }
 
-.text-emote-2 {
-  --tw-text-opacity: 1;
-  color: rgba(255, 129, 5, var(--tw-text-opacity));
-}
-
-.text-emote-3 {
-  --tw-text-opacity: 1;
-  color: rgba(241, 172, 91, var(--tw-text-opacity));
-}
-
-.text-emote-4 {
-  --tw-text-opacity: 1;
-  color: rgba(135, 189, 16, var(--tw-text-opacity));
-}
-
-.text-emote-5 {
-  --tw-text-opacity: 1;
-  color: rgba(77, 132, 75, var(--tw-text-opacity));
+.ReactModal__Content::-webkit-scrollbar {
+  display: none
 }

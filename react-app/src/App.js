@@ -11,6 +11,8 @@ import SignUpPage from "./components/SignUpPage/SignUpPage";
 import MoodPage from "./components/MoodPage/MoodPage";
 import Sidebar from "./components/Elements/Sidebar/Sidebar";
 import Navbar from "./components/Elements/Navbar";
+import GoalPage from "./components/GoalPage/GoalPage";
+import ObservationPage from "./components/ObservationPage/ObservationPage";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -50,6 +52,12 @@ function App() {
               <Sidebar />
               <ProtectedRoute path="/dashboard/moods" exact={true}>
                 <MoodPage user={user} />
+              </ProtectedRoute>
+              <ProtectedRoute path="/dashboard/goals" exact={true}>
+                <GoalPage user={user} />
+              </ProtectedRoute>
+              <ProtectedRoute path="/dashboard/observations" exact={true}>
+                <ObservationPage user={user} />
               </ProtectedRoute>
             </div>
           </div>
