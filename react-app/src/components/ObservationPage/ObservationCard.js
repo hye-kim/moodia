@@ -12,7 +12,7 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     background: "none",
     border: "none",
-    maxHeight: "calc(100vh - 2rem)"
+    maxHeight: "calc(100vh - 2rem)",
   },
   overlay: {
     position: "fixed",
@@ -31,7 +31,7 @@ function ObservationCard({ observation }) {
       <div className="relative">
         <div
           onClick={() => setIsOpen(true)}
-          className="absolute transition duration-200 flex justify-center items-center w-full h-full m-1 md:w-96 z-49 opacity-0 font-lg text-white cursor-pointer hover:bg-black hover:opacity-50"
+          className="absolute transition duration-200 flex justify-center overflow-hidden items-center w-full h-full m-1 md:w-96 z-49 opacity-0 font-lg text-white cursor-pointer hover:bg-black hover:opacity-50"
         >
           Open observation
         </div>

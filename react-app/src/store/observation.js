@@ -45,6 +45,23 @@ export const createObservation = (observation) => async (dispatch) => {
   }
 };
 
+export const createObservationBody = (observation) => async (dispatch) => {
+    const res = await fetch(`/api/observations/${observation.id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        body: observation.body,
+      }),
+    });
+
+    if (res.ok) {
+      const observation = await res.json();
+      dispatch(addObservation(observation));
+    }
+  };
+
 export const removeObservation = (observation) => async (dispatch) => {
   const res = await fetch(`/api/observations/${observation.id}`, {
     method: "DELETE",

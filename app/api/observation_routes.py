@@ -30,9 +30,20 @@ def create_observation():
     return observation.to_dict()
 
 
+@observation_routes.route("/<int:id>", methods=["POST"])
+@login_required
+def create_observation_body(id):
+    data = request.json
+    observation = Observation.query.get(id)
+    observation.body = data["body"]
+    db.session.add(observation)
+    db.session.commit()
+    return observation.to_dict()
+
+
 @observation_routes.route("/<int:id>", methods=["PUT"])
 @login_required
-def edit_observation(id):
+def edit_observation_body(id):
     data = request.json
     observation = Observation.query.get(id)
     observation.body = data["body"]

@@ -23,7 +23,7 @@ function ObservationPage({ user }) {
       <div>
         <ObservationForm user={user} />
         <div className="h-screen">
-          <div className="flex flex-row flex-wrap">
+          <div className="flex flex-row flex-wrap items-start">
             {Object.values(observations).map((observation) => {
               return (
                 <ObservationCard
