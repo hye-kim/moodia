@@ -14,9 +14,8 @@ const getMoods = (payload) => ({
 
 const deleteMood = (payload) => ({
   type: DELETE_MOOD,
-  payload
-})
-
+  payload,
+});
 
 export const fetchMoods = (month, year) => async (dispatch) => {
   const res = await fetch(`/api/moods/?month=${month}&year=${year}`);
@@ -67,13 +66,13 @@ export const changeMood = (mood) => async (dispatch) => {
 
 export const removeMood = (mood) => async (dispatch) => {
   const res = await fetch(`/api/moods/${mood.id}`, {
-    method: "DELETE"
-  })
+    method: "DELETE",
+  });
 
   if (res.ok) {
-    dispatch(deleteMood(mood))
+    dispatch(deleteMood(mood));
   }
-}
+};
 
 const initialState = {};
 
@@ -95,8 +94,8 @@ export default function moodReducer(state = initialState, { type, payload }) {
 
     case DELETE_MOOD: {
       const newState = { ...state };
-      delete newState[new Date(payload.date).getDate()]
-      return newState
+      delete newState[new Date(payload.date).getDate()];
+      return newState;
     }
 
     default:

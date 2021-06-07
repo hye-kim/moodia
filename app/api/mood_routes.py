@@ -12,8 +12,12 @@ def get_moods():
     data = request.args
     start = date(year=int(data["year"]), month=int(data["month"]), day=1)
     end = date(year=int(data["year"]), month=(int(data["month"]) + 1), day=1)
-    moods = Mood.query.filter(Mood.date < end).filter(Mood.date >= start).all()
-    print("======= MOODS ========", moods)
+    moods = (
+        Mood.query.filter(Mood.date < end)
+        .filter(Mood.date >= start)
+        .filter(Mood.user_id == current_user.id)
+        .all()
+    )
     return jsonify([mood.to_dict() for mood in moods])
 
 
@@ -32,10 +36,17 @@ def create_mood():
 @login_required
 def edit_mood(id):
     data = request.json
-
     mood = Mood.query.get(id)
-    print(mood)
     mood.rating = data["rating"]
     db.session.add(mood)
     db.session.commit()
     return mood.to_dict()
+
+
+@mood_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
+def delete_mood(id):
+    mood = Mood.query.get(id)
+    db.session.delete(mood)
+    db.session.commit()
+    return {"message": "deleted"}
