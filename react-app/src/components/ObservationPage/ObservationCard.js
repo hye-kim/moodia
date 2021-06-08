@@ -32,7 +32,7 @@ function ObservationCard({ observation }) {
       <div className="relative">
         <div
           onClick={() => setIsOpen(true)}
-          className="absolute transition duration-200 flex justify-center overflow-hidden items-center w-full h-full m-1 md:w-96 z-49 opacity-0 font-lg text-white cursor-pointer hover:bg-black hover:opacity-50"
+          className="absolute transition duration-200 flex justify-center overflow-hidden items-center w-full h-full m-1 z-49 opacity-0 font-lg text-white cursor-pointer hover:bg-black hover:opacity-50"
         >
           Open observation
         </div>
