@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Zoom } from "react-awesome-reveal";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchObservations } from "../../store/observation";
 import PageHeading from "../Elements/PageHeading";
@@ -11,9 +12,7 @@ function ObservationPage({ user }) {
 
   useEffect(() => {
     dispatch(fetchObservations());
-  }, [dispatch]);
-
-  console.log(Object.keys(observations).length)
+  }, [dispatch, user]);
 
   return (
     <div className="flex flex-col md:justify-between w-full md:my-6 md:ml-5">
@@ -26,10 +25,9 @@ function ObservationPage({ user }) {
           <div className="flex flex-row flex-wrap items-start">
             {Object.values(observations).map((observation) => {
               return (
-                <ObservationCard
-                  key={observation.id}
-                  observation={observation}
-                />
+                <Zoom key={observation.id} duration={500}>
+                  <ObservationCard observation={observation} />
+                </Zoom>
               );
             })}
           </div>

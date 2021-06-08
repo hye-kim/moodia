@@ -20,7 +20,6 @@ function ObservationForm({ user }) {
 
     if (res.ok) {
       const data = await res.json();
-      console.log(data.url);
       setImageUrl(data.url);
       setImageLoading(false);
     }

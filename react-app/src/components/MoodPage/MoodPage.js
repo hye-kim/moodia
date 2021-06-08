@@ -19,19 +19,25 @@ function MoodPage({ user }) {
   }, [dispatch, month, year]);
 
   return (
-    <div className="flex flex-col md:flex-row md:justify-between w-full md:my-6 md:ml-5">
-      <div className="w-full md:w-1/2">
-        <div>
-          <PageHeading title={"Track your mood"} />
+    <div className="flex flex-col w-full">
+      <div className="flex flex-col md:flex-row md:justify-between w-full md:my-6 md:ml-5">
+        <div className="w-full md:w-1/2">
+          <div>
+            <PageHeading title={"Track your mood"} />
+            <Zoom duration={500}>
+              <Calendar date={date} setDate={setDate} moodData={moods} />
+            </Zoom>
+          </div>
+        </div>
+        <div className="md:w-2/5">
           <Zoom duration={500}>
-            <Calendar date={date} setDate={setDate} moodData={moods} />
-            <MoodGraph date={date} moodData={moods} />
+            <MoodForm date={date} user={user} moodData={moods} />
           </Zoom>
         </div>
       </div>
-      <div className="md:w-2/5">
+      <div className="md:w-full pb-10 pl-5">
         <Zoom duration={500}>
-          <MoodForm date={date} user={user} moodData={moods} />
+          <MoodGraph date={date} moodData={moods} />
         </Zoom>
       </div>
     </div>

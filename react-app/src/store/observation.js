@@ -46,21 +46,21 @@ export const createObservation = (observation) => async (dispatch) => {
 };
 
 export const createObservationBody = (observation) => async (dispatch) => {
-    const res = await fetch(`/api/observations/${observation.id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        body: observation.body,
-      }),
-    });
+  const res = await fetch(`/api/observations/${observation.id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      body: observation.body,
+    }),
+  });
 
-    if (res.ok) {
-      const observation = await res.json();
-      dispatch(addObservation(observation));
-    }
-  };
+  if (res.ok) {
+    const observation = await res.json();
+    dispatch(addObservation(observation));
+  }
+};
 
 export const removeObservation = (observation) => async (dispatch) => {
   const res = await fetch(`/api/observations/${observation.id}`, {
@@ -78,19 +78,21 @@ export default function observationReducer(
   state = initialState,
   { type, payload }
 ) {
-  const newState = { ...state };
   switch (type) {
     case GET_OBSERVATIONS: {
+      const newState = {};
       payload.forEach((observation) => {
         newState[observation.id] = observation;
       });
       return newState;
     }
     case ADD_OBSERVATION: {
+      const newState = { ...state };
       newState[payload.id] = payload;
       return newState;
     }
     case DELETE_OBSERVATION: {
+      const newState = { ...state };
       delete newState[payload.id];
       return newState;
     }

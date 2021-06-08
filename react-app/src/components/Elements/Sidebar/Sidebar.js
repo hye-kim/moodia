@@ -22,13 +22,13 @@ function Sidebar() {
           </h1>
         )}
         <ul className="text-gray-600">
-          <SidebarItem url="dashboard">{HomeIconElement} Dashboard</SidebarItem>
+          <SidebarItem url="">{HomeIconElement} Dashboard</SidebarItem>
           <SidebarItem url="moods">{EmoticonIconElement} Moods</SidebarItem>
           {/* <SidebarItem urlTarget="breathing">
             {WindIconElement} Breathing
           </SidebarItem> */}
           <SidebarItem url="goals">{StarIconElement} Goals</SidebarItem>
-          <SidebarItem url="routines">
+          <SidebarItem url="habits">
             {CalendarIconElement} Habits
           </SidebarItem>
           <SidebarItem url="observations">

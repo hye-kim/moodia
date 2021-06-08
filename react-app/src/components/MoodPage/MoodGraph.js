@@ -28,18 +28,36 @@ function MoodGraph({ date, moodData }) {
   };
 
   const options = {
+    response: true,
+    maintainAspectRAtio: false,
     scales: {
       yAxes: [
         {
           ticks: {
-            beginAtZero: true,
+            min: -2,
+            max: 2,
+            stepSize: 1,
+            callback: function (label, index, labels) {
+              switch (label) {
+                case -2:
+                  return "Sad";
+                case -1:
+                  return "Unhappy";
+                case 0:
+                  return "Okay";
+                case 1:
+                  return "Satisfied";
+                case 2:
+                  return "Happy";
+                default:
+                  return;
+              }
+            },
           },
         },
       ],
     },
   };
-
-  console.log(new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate());
 
   return (
     <div className="mt-3 p-3 rounded-xl shadow-md bg-white">

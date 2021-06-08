@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import { Zoom } from "react-awesome-reveal";
 import ObservationModal from "./ObservationModal";
 
 const customStyles = {
@@ -46,7 +47,9 @@ function ObservationCard({ observation }) {
         onRequestClose={() => setIsOpen(false)}
         style={customStyles}
       >
-        <ObservationModal observation={observation} setIsOpen={setIsOpen} />
+        <Zoom duration={500}>
+          <ObservationModal observation={observation} setIsOpen={setIsOpen} />
+        </Zoom>
       </Modal>
     </>
   );
