@@ -30,14 +30,6 @@ function ObservationPage({ user }) {
       <div>
         <ObservationForm user={user} />
         <div className="h-screen">
-          {/* <div className="flex flex-row flex-wrap items-start"> */}
-          {/* <Masonry
-            breakpointCols={2}
-            className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column"
-          >
-            {items}
-          </Masonry> */}
           <Masonry
               breakpointCols={breakpointColumnsObj}
               className="my-masonry-grid"
@@ -51,7 +43,6 @@ function ObservationPage({ user }) {
                 );
               })}
             </Masonry>
-          {/* </div> */}
         </div>
       </div>
     </div>
