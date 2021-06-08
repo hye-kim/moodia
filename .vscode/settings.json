@@ -1,6 +1,0 @@
-{
-    "python.pythonPath": "/home/hye/.pyenv/versions/3.8.3/bin/python",
-    "python.linting.pylintEnabled": false,
-    "python.linting.enabled": true,
-    "python.linting.pycodestyleEnabled": true
-}
