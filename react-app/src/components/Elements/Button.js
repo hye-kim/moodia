@@ -10,6 +10,7 @@ function Button({
   type,
   onClick,
   full,
+
 }) {
   return (
     <button

@@ -27,6 +27,9 @@ function ObservationForm({ user }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (imageUrl === "") {
+      return;
+    }
     const observation = {
       pictureUrl: imageUrl,
       body: "",
@@ -59,7 +62,14 @@ function ObservationForm({ user }) {
         style={{ display: "none" }}
         onClick={() => setImageUrl("")}
       />
-      {!imageLoading && <Button type="submit" text="Submit" />}
+      {
+        <Button
+          type="submit"
+          text="Submit"
+          bgColor={imageUrl !== "" ? "" : imageLoading ? "" : "gray-400"}
+          onClick={() => setImageUrl("")}
+        />
+      }
     </form>
   );
 }

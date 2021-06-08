@@ -72,7 +72,7 @@ function ObservationModal({ observation, setIsOpen }) {
           </form>
         </div>
         <div className="text-right mt-4">
-          <Button text="Close" onClick={() => setIsOpen(false)} />
+          <Button text="Close" onClick={() => setIsOpen(false)} bgColor="red-500" />
         </div>
       </div>
     </div>

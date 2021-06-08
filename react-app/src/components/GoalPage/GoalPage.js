@@ -1,21 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "react-modal";
+import { Zoom } from "react-awesome-reveal";
+import Button from "../Elements/Button";
+import PageHeading from "../Elements/PageHeading";
+import GoalCard from "./GoalCard";
+import GoalForm from "./GoalForm";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    background: "none",
+    border: "none",
+    maxHeight: "calc(100vh - 2rem)",
+    width: "50%"
+  },
+  overlay: {
+    position: "fixed",
+    zIndex: 1000,
+    overflowY: "auto",
+    backgroundColor: "rgba(0,0,0,0.25)"
+  },
+};
+
+Modal.setAppElement("#root");
 
 function GoalPage() {
+  const [modalIsOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="flex flex-col flex-wrap md:flex-row md:justify-between w-full md:my-6 md:ml-5">
-      <div className="px-8 py-4 m-5 bg-white rounded-xl shadow-md">
-        <div className="flex justify-between mt-3 mb-5">Hello</div>
+    <>
+      <div className="flex flex-col md:justify-between w-full md:my-6 md:ml-5">
+        <div className="flex flex-row justify-between">
+          <PageHeading title="Goals" />
+          <div>
+            <Button text="+ Add Goal" onClick={() => setIsOpen("goal-form")} />
+          </div>
+        </div>
+        <div>
+          <div className="h-screen flex flex-row">
+            <GoalCard />
+            <GoalCard />
+          </div>
+        </div>
       </div>
-      <div className="px-8 py-4 m-5 bg-white rounded-xl shadow-md">
-        <div className="flex justify-between mt-3 mb-5">Hello</div>
-      </div>
-      <div className="px-8 py-4 m-5 bg-white rounded-xl shadow-md">
-        <div className="flex justify-between mt-3 mb-5">Hello</div>
-      </div>
-      <div className="px-8 py-4 m-5 bg-white rounded-xl shadow-md">
-        <div className="flex justify-between mt-3 mb-5">Hello</div>
-      </div>
-    </div>
+      <Modal
+        isOpen={modalIsOpen === "goal-form"}
+        onRequestClose={() => setIsOpen(false)}
+        style={customStyles}
+      >
+        <Zoom duration={500}>
+          <GoalForm setIsOpen={setIsOpen} />
+        </Zoom>
+      </Modal>
+    </>
   );
 }
 
