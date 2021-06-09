@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { Zoom } from "react-awesome-reveal";
 import Button from "../Elements/Button";
 import PageHeading from "../Elements/PageHeading";
 import GoalCard from "./GoalCard";
 import GoalForm from "./GoalForm";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchGoals } from "../../store/goal";
 
 const customStyles = {
   content: {
@@ -17,20 +19,26 @@ const customStyles = {
     background: "none",
     border: "none",
     maxHeight: "calc(100vh - 2rem)",
-    width: "50%"
+    width: "50%",
   },
   overlay: {
     position: "fixed",
     zIndex: 1000,
     overflowY: "auto",
-    backgroundColor: "rgba(0,0,0,0.25)"
+    backgroundColor: "rgba(0,0,0,0.25)",
   },
 };
 
 Modal.setAppElement("#root");
 
-function GoalPage() {
+function GoalPage({ user }) {
+  const dispatch = useDispatch();
+  const goals = useSelector((state) => state.goals);
   const [modalIsOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchGoals());
+  }, [dispatch]);
 
   return (
     <>
@@ -43,8 +51,9 @@ function GoalPage() {
         </div>
         <div>
           <div className="h-screen flex flex-row">
-            <GoalCard />
-            <GoalCard />
+            {Object.values(goals).map((goal) => {
+              return <GoalCard goal={goal} />;
+            })}
           </div>
         </div>
       </div>
@@ -54,7 +63,7 @@ function GoalPage() {
         style={customStyles}
       >
         <Zoom duration={500}>
-          <GoalForm setIsOpen={setIsOpen} />
+          <GoalForm setIsOpen={setIsOpen} user={user} />
         </Zoom>
       </Modal>
     </>

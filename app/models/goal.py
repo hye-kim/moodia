@@ -20,4 +20,5 @@ class Goal(db.Model):
             "completed_at": self.completed_at,
             "title": self.title,
             "user_id": self.user_id,
+            "steps": [step.to_dict() for step in self.steps]
         }
