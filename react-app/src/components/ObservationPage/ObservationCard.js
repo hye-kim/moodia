@@ -39,7 +39,7 @@ function ObservationCard({ observation }) {
         <img
           src={observation.picture_url}
           alt="observation"
-          className="w-96 m-1"
+          className="w-full m-1"
         />
       </div>
       <Modal

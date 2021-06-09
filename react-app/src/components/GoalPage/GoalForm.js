@@ -30,6 +30,7 @@ function GoalForm({ setIsOpen, user }) {
     };
 
     dispatch(createGoal(newGoal));
+    setIsOpen(false)
   };
 
   return (

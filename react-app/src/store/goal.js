@@ -1,5 +1,9 @@
 const ADD_GOAL = "goal/ADD_GOAL";
 const GET_GOALS = "goal/GET_GOALS";
+const DELETE_GOAL = "goal/DELETE_GOAL";
+const COMPLETE_STEP = "goal/COMPLETE_STEP";
+const EDIT_STEP = "goal/EDIT_STEP";
+const DELETE_STEP = "goal/DELETE_STEP";
 
 const addGoal = (payload) => ({
   type: ADD_GOAL,
@@ -8,6 +12,26 @@ const addGoal = (payload) => ({
 
 const getGoals = (payload) => ({
   type: GET_GOALS,
+  payload,
+});
+
+const deleteGoal = (payload) => ({
+  type: DELETE_GOAL,
+  payload,
+});
+
+const completeStep = (payload) => ({
+  type: COMPLETE_STEP,
+  payload,
+});
+
+const editStep = (payload) => ({
+  type: EDIT_STEP,
+  payload,
+});
+
+const deleteStep = (payload) => ({
+  type: DELETE_STEP,
   payload,
 });
 
@@ -52,6 +76,40 @@ export const createGoal = (goal) => async (dispatch) => {
   }
 };
 
+export const removeGoal = (goal) => async (dispatch) => {
+  const res = await fetch(`/api/goals/${goal.id}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(deleteGoal(goal));
+  }
+};
+
+export const changeStep = (step) => async (dispatch) => {
+  const res = await fetch(`/api/goals/${step.goal_id}/steps/${step.step_id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      step: step,
+    }),
+  });
+
+  if (res.ok) {
+    dispatch(editStep(step));
+  }
+};
+
+export const removeStep = (step) => async (dispatch) => {
+  const res = await fetch(`/api/goals/${step.goal_id}/steps/${step.step_id}`, {
+    method: "DELETE",
+  });
+
+  if (res.ok) {
+    dispatch(deleteStep(step));
+  }
+};
+
 const initialState = {};
 
 export default function goalReducer(state = initialState, { type, payload }) {
@@ -63,9 +121,16 @@ export default function goalReducer(state = initialState, { type, payload }) {
       });
       return newState;
     }
+
     case ADD_GOAL: {
       const newState = { ...state };
       newState[payload.id] = payload;
+      return newState;
+    }
+
+    case DELETE_GOAL: {
+      const newState = { ...state };
+      delete newState[payload.id];
       return newState;
     }
 

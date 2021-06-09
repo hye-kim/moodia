@@ -36,6 +36,7 @@ function ObservationForm({ user }) {
       userId: user.id,
     };
     dispatch(createObservation(observation));
+    setImageUrl("")
   };
 
   return (
@@ -64,10 +65,8 @@ function ObservationForm({ user }) {
       />
       {
         <Button
-          type="submit"
           text="Submit"
           bgColor={imageUrl !== "" ? "" : imageLoading ? "" : "gray-400"}
-          onClick={() => setImageUrl("")}
         />
       }
     </form>

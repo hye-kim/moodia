@@ -13,6 +13,8 @@ import {
   mdiEmoticonNeutralOutline,
   mdiEmoticonHappyOutline,
   mdiEmoticonExcitedOutline,
+  mdiPencil,
+  mdiCheck,
 } from "@mdi/js";
 
 const emotes = [
@@ -101,5 +103,23 @@ export const deleteIconElement = (
     title="delete"
     size={0.95}
     className="transition duration-200 text-gray-500 hover:text-red-500 cursor-pointer"
+  ></Icon>
+);
+
+export const editIconElement = (
+  <Icon
+    path={mdiPencil}
+    title="edit"
+    size={0.95}
+    className="transition duration-200 text-gray-500 hover:text-highlight cursor-pointer"
+  ></Icon>
+);
+
+export const checkIconElement = (
+  <Icon
+    path={mdiCheck}
+    title="check"
+    size={0.95}
+    className="transition duration-200 text-gray-500 hover:text-green-500 cursor-pointer"
   ></Icon>
 );

@@ -13,6 +13,7 @@ import Sidebar from "./components/Elements/Sidebar/Sidebar";
 import Navbar from "./components/Elements/Navbar";
 import GoalPage from "./components/GoalPage/GoalPage";
 import ObservationPage from "./components/ObservationPage/ObservationPage";
+import SplashPage from "./components/DashboardPage/DashboardPage";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -50,6 +51,9 @@ function App() {
           <div className="flex justify-center mx-2">
             <div className="flex flex-col md:flex-row md:justify-between w-full lg:w-5/6 md:m-0">
               <Sidebar />
+              <ProtectedRoute path="/dashboard" exact={true}>
+                <SplashPage user={user} />
+              </ProtectedRoute>
               <ProtectedRoute path="/dashboard/moods" exact={true}>
                 <MoodPage user={user} />
               </ProtectedRoute>

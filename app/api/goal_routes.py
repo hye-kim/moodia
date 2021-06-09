@@ -31,15 +31,21 @@ def create_goal():
     return goal.to_dict()
 
 
+@goal_routes.route("/<int:id>", methods=["DELETE"])
+@login_required
+def delete_goal(id):
+    goal = Goal.query.get(id)
+    db.session.delete(goal)
+    db.session.commit()
+    return {"message": "deleted"}
+
+
 @goal_routes.route("/<int:id>/steps", methods=["POST"])
 @login_required
 def create_steps(id):
     data = request.json
     stepsData = data["steps"]
-    steps = [
-        Step(body=step, completed=False, goal_id=id)
-        for step in stepsData
-    ]
+    steps = [Step(body=step, completed=False, goal_id=id) for step in stepsData]
     db.session.bulk_save_objects(steps)
     db.session.commit()
     return jsonify([step.to_dict() for step in steps])
