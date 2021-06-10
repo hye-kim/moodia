@@ -49,3 +49,15 @@ def create_steps(id):
     db.session.bulk_save_objects(steps)
     db.session.commit()
     return jsonify([step.to_dict() for step in steps])
+
+
+@goal_routes.route("/<int:id>/steps/<int:step_id>", methods=["PUT"])
+@login_required
+def edit_step(id, step_id):
+    data = request.json
+    step = Step.query.get(step_id)
+    step.body = data["body"]
+    step.completed = data["completed"]
+    db.session.add(step)
+    db.session.commit()
+    return step.to_dict()

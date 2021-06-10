@@ -87,12 +87,10 @@ export const removeGoal = (goal) => async (dispatch) => {
 };
 
 export const changeStep = (step) => async (dispatch) => {
-  const res = await fetch(`/api/goals/${step.goal_id}/steps/${step.step_id}`, {
+  const res = await fetch(`/api/goals/${step.goal_id}/steps/${step.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      step: step,
-    }),
+    body: JSON.stringify({ ...step }),
   });
 
   if (res.ok) {
@@ -116,8 +114,13 @@ export default function goalReducer(state = initialState, { type, payload }) {
   switch (type) {
     case GET_GOALS: {
       const newState = {};
-      payload.forEach((observation) => {
-        newState[observation.id] = observation;
+      payload.forEach((goal) => {
+        const newSteps = {};
+        goal.steps.forEach((step) => {
+          newSteps[step.id] = step;
+        });
+        goal.steps = newSteps;
+        newState[goal.id] = goal;
       });
       return newState;
     }
@@ -131,6 +134,12 @@ export default function goalReducer(state = initialState, { type, payload }) {
     case DELETE_GOAL: {
       const newState = { ...state };
       delete newState[payload.id];
+      return newState;
+    }
+
+    case EDIT_STEP: {
+      const newState = { ...state };
+      newState[payload.goal_id].steps[payload.id] = payload
       return newState;
     }
 
