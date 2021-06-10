@@ -12,7 +12,7 @@ class Goal(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     user = db.relationship("User", back_populates="goals")
-    steps = db.relationship("Step", back_populates="goal")
+    steps = db.relationship("Step", back_populates="goal", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -21,5 +21,5 @@ class Goal(db.Model):
             "completed_at": self.completed_at,
             "title": self.title,
             "user_id": self.user_id,
-            "steps": [step.to_dict() for step in self.steps]
+            "steps": [step.to_dict() for step in self.steps],
         }

@@ -1,8 +1,6 @@
 const ADD_GOAL = "goal/ADD_GOAL";
 const GET_GOALS = "goal/GET_GOALS";
 const DELETE_GOAL = "goal/DELETE_GOAL";
-const COMPLETE_STEP = "goal/COMPLETE_STEP";
-const EDIT_STEP = "goal/EDIT_STEP";
 const DELETE_STEP = "goal/DELETE_STEP";
 
 const addGoal = (payload) => ({
@@ -17,16 +15,6 @@ const getGoals = (payload) => ({
 
 const deleteGoal = (payload) => ({
   type: DELETE_GOAL,
-  payload,
-});
-
-const completeStep = (payload) => ({
-  type: COMPLETE_STEP,
-  payload,
-});
-
-const editStep = (payload) => ({
-  type: EDIT_STEP,
   payload,
 });
 
@@ -69,10 +57,25 @@ export const createGoal = (goal) => async (dispatch) => {
       }),
     });
     if (res2.ok) {
-      const steps = await res2.json();
-      newGoal["steps"] = steps;
-      dispatch(addGoal(newGoal));
+      const goalWithSteps = await res2.json();
+      dispatch(addGoal(goalWithSteps));
     }
+  }
+};
+
+export const changeGoal = (goal) => async (dispatch) => {
+  const res = await fetch(`/api/goals/${goal.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      title: goal.title,
+    }),
+  });
+
+  if (res.ok) {
+    dispatch(addGoal(goal));
   }
 };
 
@@ -94,17 +97,19 @@ export const changeStep = (step) => async (dispatch) => {
   });
 
   if (res.ok) {
-    dispatch(editStep(step));
+    const goal = await res.json();
+    dispatch(addGoal(goal));
   }
 };
 
 export const removeStep = (step) => async (dispatch) => {
-  const res = await fetch(`/api/goals/${step.goal_id}/steps/${step.step_id}`, {
+  const res = await fetch(`/api/goals/${step.goal_id}/steps/${step.id}`, {
     method: "DELETE",
   });
 
   if (res.ok) {
-    dispatch(deleteStep(step));
+    const goal = await res.json()
+    dispatch(addGoal(goal));
   }
 };
 
@@ -127,6 +132,11 @@ export default function goalReducer(state = initialState, { type, payload }) {
 
     case ADD_GOAL: {
       const newState = { ...state };
+      const newSteps = {};
+      payload.steps.forEach((step) => {
+        newSteps[step.id] = step;
+      });
+      payload.steps = newSteps;
       newState[payload.id] = payload;
       return newState;
     }
@@ -134,12 +144,6 @@ export default function goalReducer(state = initialState, { type, payload }) {
     case DELETE_GOAL: {
       const newState = { ...state };
       delete newState[payload.id];
-      return newState;
-    }
-
-    case EDIT_STEP: {
-      const newState = { ...state };
-      newState[payload.goal_id].steps[payload.id] = payload
       return newState;
     }
 

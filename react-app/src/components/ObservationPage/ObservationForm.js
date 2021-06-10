@@ -42,7 +42,7 @@ function ObservationForm({ user }) {
   return (
     <form className="flex justify-between my-5" onSubmit={handleSubmit}>
       <input
-        type="text"
+        type="url"
         name="imgUrl"
         className="w-full md:w-11/12 p-2 mr-3 border-b shadow-sm outline-none focus:border-highlight"
         placeholder="Enter an image URL or upload a local image"

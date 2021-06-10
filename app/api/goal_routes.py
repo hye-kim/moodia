@@ -31,6 +31,17 @@ def create_goal():
     return goal.to_dict()
 
 
+@goal_routes.route("/<int:id>", methods=["PUT"])
+@login_required
+def edit_goal(id):
+    data = request.json
+    goal = Goal.query.get(id)
+    goal.title = data["title"]
+    db.session.add(goal)
+    db.session.commit()
+    return goal.to_dict()
+
+
 @goal_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_goal(id):
@@ -48,7 +59,8 @@ def create_steps(id):
     steps = [Step(body=step, completed=False, goal_id=id) for step in stepsData]
     db.session.bulk_save_objects(steps)
     db.session.commit()
-    return jsonify([step.to_dict() for step in steps])
+    goal = Goal.query.get(id)
+    return goal.to_dict()
 
 
 @goal_routes.route("/<int:id>/steps/<int:step_id>", methods=["PUT"])
@@ -60,4 +72,14 @@ def edit_step(id, step_id):
     step.completed = data["completed"]
     db.session.add(step)
     db.session.commit()
-    return step.to_dict()
+    goal = Goal.query.get(id)
+    return goal.to_dict()
+
+@goal_routes.route("/<int:id>/steps/<int:step_id>", methods=["DELETE"])
+@login_required
+def delete_step(id, step_id):
+    step = Step.query.get(step_id)
+    db.session.delete(step)
+    db.session.commit()
+    goal = Goal.query.get(id)
+    return goal.to_dict()

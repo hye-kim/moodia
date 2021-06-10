@@ -45,6 +45,7 @@ function GoalForm({ setIsOpen, user }) {
             name="goal"
             type="text"
             value={goal}
+            required={true}
             onChange={(e) => setGoal(e.target.value)}
             className="appearance-none block w-full p-2.5 rounded-md border border-gray-300 placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-highlight transition duration-150 ease-in-out sm:text-sm sm:leading-5"
           />
@@ -62,6 +63,7 @@ function GoalForm({ setIsOpen, user }) {
                 name={`step-${i + 1}`}
                 type="text"
                 value={steps[i]}
+                required={true}
                 onChange={(e) => {
                   const tempSteps = [...steps];
                   tempSteps[i] = e.target.value;

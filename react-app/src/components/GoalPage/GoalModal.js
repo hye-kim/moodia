@@ -5,11 +5,12 @@ import Button from "../Elements/Button";
 import PageHeading from "../Elements/PageHeading";
 import {
   checkIconElement,
+  closeIconElement,
   deleteIconElement,
   editIconElement,
 } from "../Icons/Icons";
 
-function GoalModal({ goal }) {
+function GoalModal({ goal, setIsOpen }) {
   const dispatch = useDispatch();
   const [body, setBody] = useState("");
   const [showEdit, setShowEdit] = useState(false);
@@ -37,12 +38,25 @@ function GoalModal({ goal }) {
 
   return (
     <div className="inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-gray-50 shadow-xl rounded-2xl w-full">
-      <PageHeading title={goal.title} />
+      <div className="relative w-full">
+        <PageHeading title={goal.title} />
+        <div
+          onClick={() => setIsOpen(false)}
+          className="absolute -right-2 -top-4"
+        >
+          {closeIconElement}
+        </div>
+      </div>
       <div className="w-full">
         <div className="overflow-auto max-h-52 my-2 md:my-0">
           {Object.values(goal.steps).map((step) => {
             return (
-              <div className={`flex justify-between w-full my-2 p-2 rounded-md ${step.completed ? "bg-green-200" : "bg-gray-200"}`}>
+              <div
+                key={step.id}
+                className={`flex justify-between w-full my-2 p-2 rounded-md ${
+                  step.completed ? "bg-green-200" : "bg-gray-200"
+                }`}
+              >
                 {(!showEdit || activeStep !== step.id) && step.body}
                 {showEdit && activeStep === step.id && (
                   <form
@@ -96,7 +110,7 @@ function GoalModal({ goal }) {
                   {(!showEdit || activeStep !== step.id) && (
                     <div
                       className="px-1.5"
-                      onClick={(e) => handleDelete(e, activeStep)}
+                      onClick={(e) => handleDelete(e, step)}
                     >
                       {" "}
                       {deleteIconElement}

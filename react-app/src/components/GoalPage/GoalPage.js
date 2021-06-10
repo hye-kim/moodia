@@ -52,7 +52,11 @@ function GoalPage({ user }) {
         <div>
           <div className="h-screen flex flex-row">
             {Object.values(goals).map((goal) => {
-              return <GoalCard goal={goal} />;
+              return (
+                <Zoom key={goal.id} duration={500}>
+                  <GoalCard goal={goal} />
+                </Zoom>
+              );
             })}
           </div>
         </div>

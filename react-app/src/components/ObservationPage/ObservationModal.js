@@ -4,7 +4,7 @@ import {
   createObservationBody,
   removeObservation,
 } from "../../store/observation";
-import { deleteIconElement } from "../Icons/Icons";
+import { closeIconElement, deleteIconElement } from "../Icons/Icons";
 import TextareaAutosize from "react-textarea-autosize";
 import Button from "../Elements/Button";
 
@@ -34,10 +34,17 @@ function ObservationModal({ observation, setIsOpen }) {
 
   return (
     <div className="inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-gray-50 shadow-xl rounded-2xl">
-      <h3 className="text-lg font-medium leading-6 text-gray-900 flex justify-between">
-        What parts of the picture speak to you?
-        <div onClick={handleDelete}>{deleteIconElement}</div>
-      </h3>
+      <div className="relative w-full">
+        <h3 className="text-lg font-medium leading-6 text-gray-900 flex justify-between">
+          What parts of the picture speak to you?
+          {/* <div onClick={handleDelete}>{deleteIconElement}</div> */}
+        </h3>
+        <div
+        onClick={() => setIsOpen(false)}
+        className="absolute -right-2 -top-4">
+          {closeIconElement}
+        </div>
+      </div>
       <div className="flex flex-col sm:max-w-sm md:max-w-lg">
         <img
           src={observation.picture_url}
@@ -61,6 +68,7 @@ function ObservationModal({ observation, setIsOpen }) {
           >
             <TextareaAutosize
               value={body}
+              required={true}
               onChange={(e) => setBody(e.target.value)}
               placeholder="Enter your observation"
               className="w-5/6 p-2 shadow-sm rounded-xl outline-none border-b focus:border-highlight resize-none"
@@ -70,9 +78,6 @@ function ObservationModal({ observation, setIsOpen }) {
               bgColor="normal"
             />
           </form>
-        </div>
-        <div className="text-right mt-4">
-          <Button text="Close" onClick={() => setIsOpen(false)} bgColor="red-500" />
         </div>
       </div>
     </div>

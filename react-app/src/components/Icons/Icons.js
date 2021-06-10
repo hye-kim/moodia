@@ -15,6 +15,7 @@ import {
   mdiEmoticonExcitedOutline,
   mdiPencil,
   mdiCheck,
+  mdiClose,
 } from "@mdi/js";
 
 const emotes = [
@@ -121,5 +122,14 @@ export const checkIconElement = (
     title="check"
     size={0.95}
     className="transition duration-200 text-gray-500 hover:text-green-500 cursor-pointer"
+  ></Icon>
+);
+
+export const closeIconElement = (
+  <Icon
+    path={mdiClose}
+    title="close"
+    size={0.95}
+    className="transition duration-200 text-gray-400 hover:text-red-400 cursor-pointer"
   ></Icon>
 );
