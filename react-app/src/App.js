@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import UsersList from "./components/UsersList";
@@ -13,7 +13,8 @@ import Sidebar from "./components/Elements/Sidebar/Sidebar";
 import Navbar from "./components/Elements/Navbar";
 import GoalPage from "./components/GoalPage/GoalPage";
 import ObservationPage from "./components/ObservationPage/ObservationPage";
-import SplashPage from "./components/DashboardPage/DashboardPage";
+import DashboardPage from "./components/DashboardPage/DashboardPage";
+import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -51,23 +52,37 @@ function App() {
           <div className="flex justify-center mx-2">
             <div className="flex flex-col md:flex-row md:justify-between w-full lg:w-5/6 md:m-0">
               <Sidebar />
-              <ProtectedRoute path="/dashboard" exact={true}>
-                <SplashPage user={user} />
-              </ProtectedRoute>
-              <ProtectedRoute path="/dashboard/moods" exact={true}>
-                <MoodPage user={user} />
-              </ProtectedRoute>
-              <ProtectedRoute path="/dashboard/goals" exact={true}>
-                <GoalPage user={user} />
-              </ProtectedRoute>
-              <ProtectedRoute path="/dashboard/observations" exact={true}>
-                <ObservationPage user={user} />
-              </ProtectedRoute>
+              <Switch>
+                <ProtectedRoute path="/dashboard" exact={true}>
+                  <DashboardPage user={user} />
+                </ProtectedRoute>
+                <ProtectedRoute path="/dashboard/moods" exact={true}>
+                  <MoodPage user={user} />
+                </ProtectedRoute>
+                <ProtectedRoute path="/dashboard/goals" exact={true}>
+                  <GoalPage user={user} />
+                </ProtectedRoute>
+                <ProtectedRoute path="/dashboard/habits" exact={true}>
+                  <div>Hello</div>
+                </ProtectedRoute>
+                <ProtectedRoute path="/dashboard/observations" exact={true}>
+                  <ObservationPage user={user} />
+                </ProtectedRoute>
+                <ProtectedRoute>
+                  <Redirect to="/not-found" />
+                </ProtectedRoute>
+              </Switch>
             </div>
           </div>
         </ProtectedRoute>
         <Route path="/" exact={true}>
           <LandingPage user={user} />
+        </Route>
+        <Route path="/not-found" exact={true}>
+          <NotFoundPage user={user} />
+        </Route>
+        <Route>
+          <Redirect to="/not-found" />
         </Route>
       </Switch>
     </BrowserRouter>

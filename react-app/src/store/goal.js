@@ -1,7 +1,6 @@
 const ADD_GOAL = "goal/ADD_GOAL";
 const GET_GOALS = "goal/GET_GOALS";
 const DELETE_GOAL = "goal/DELETE_GOAL";
-const DELETE_STEP = "goal/DELETE_STEP";
 
 const addGoal = (payload) => ({
   type: ADD_GOAL,
@@ -15,11 +14,6 @@ const getGoals = (payload) => ({
 
 const deleteGoal = (payload) => ({
   type: DELETE_GOAL,
-  payload,
-});
-
-const deleteStep = (payload) => ({
-  type: DELETE_STEP,
   payload,
 });
 
