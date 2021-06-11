@@ -18,13 +18,9 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
     background: "none",
     border: "none",
-    maxHeight: "calc(100vh - 2rem)",
     width: "50%",
   },
   overlay: {
-    position: "fixed",
-    zIndex: 1000,
-    overflowY: "auto",
     backgroundColor: "rgba(0,0,0,0.25)",
   },
 };
@@ -50,7 +46,7 @@ function GoalPage({ user }) {
           </div>
         </div>
         <div>
-          <div className="h-screen flex flex-row">
+          <div className="flex flex-row flex-wrap">
             {Object.values(goals).map((goal) => {
               return (
                 <Zoom key={goal.id} duration={500}>

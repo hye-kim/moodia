@@ -8,6 +8,7 @@ import GoalModal from "./GoalModal";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { deleteIconElement, editIconElement } from "../Icons/Icons";
+import LinesEllipsis from "react-lines-ellipsis";
 
 const customStyles = {
   content: {
@@ -58,11 +59,18 @@ function GoalCard({ goal }) {
 
   return (
     <>
-      <div className="h-80 px-8 py-4 m-5 bg-white rounded-xl shadow-md">
+      <div className="h-96 w-80 px-8 py-4 m-5 bg-white rounded-xl shadow-md">
         <div className="flex flex-col justify-between h-full items-center">
           <div className="w-full relative">
             {!showEdit && (
-              <h3 className="text-2xl text-center">{goal.title}</h3>
+              <LinesEllipsis
+                text={goal.title}
+                ellipsis="..."
+                maxLine="2"
+                trimRight
+                basedOn="letters"
+                className="w-1/2 m-auto text-2xl text-center break-all"
+              />
             )}
             {showEdit && (
               <form
@@ -80,7 +88,7 @@ function GoalCard({ goal }) {
                 </div>
               </form>
             )}
-            <div className="absolute -right-1 top-1">
+            <div className="absolute top-1 -right-2">
               {!showEdit && (
                 <div className="flex">
                   <div className="pr-3" onClick={() => setShowEdit(true)}>

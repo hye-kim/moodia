@@ -15,6 +15,8 @@ function GoalModal({ goal, setIsOpen }) {
   const [body, setBody] = useState("");
   const [showEdit, setShowEdit] = useState(false);
   const [activeStep, setActiveStep] = useState(null);
+  const [steps, setSteps] = useState([""]);
+  const [showStepForm, setShowStepForm] = useState(false);
 
   const handleComplete = (e, step) => {
     e.preventDefault();
@@ -35,6 +37,21 @@ function GoalModal({ goal, setIsOpen }) {
     e.preventDefault();
     dispatch(removeStep(step));
   };
+
+  const handleAddStep = (e, type) => {
+    e.preventDefault();
+    if (type === "add") {
+      setSteps([...steps, ""]);
+    } else {
+      setSteps([...steps].slice(0, steps.length - 1));
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const newGoal = {...goal}
+    newGoal.steps = steps
+  }
 
   return (
     <div className="inline-block p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-gray-50 shadow-xl rounded-2xl w-full">
@@ -122,6 +139,68 @@ function GoalModal({ goal, setIsOpen }) {
           })}
         </div>
       </div>
+      <form className="p-3 w-full font-heading" onSubmit={(e) => handleSubmit(e)}>
+        {showStepForm &&
+          steps.map((step, i) => {
+            return (
+              <div className="relative mb-6 flex">
+                <label
+                  htmlFor={`step-${i + 1 + Object.values(goal.steps).length}`}
+                  className="label absolute transition-all top-2.5 left-2 px-1 pointer-events-none bg-white text-xs"
+                >
+                  {`Step ${i + 1 + Object.values(goal.steps).length}`}
+                </label>
+                <input
+                  name={`step-${i + 1 + Object.values(goal.steps).length}`}
+                  type="text"
+                  value={steps[i]}
+                  required={true}
+                  onChange={(e) => {
+                    const tempSteps = [...steps];
+                    tempSteps[i] = e.target.value;
+                    setSteps([...tempSteps]);
+                  }}
+                  className="appearance-none block w-full p-2.5 rounded-md border border-gray-300 placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-highlight transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+                />
+                <div
+                  className="text-right px-2 py-1.5"
+                  onClick={(e) => handleAddStep(e, "delete")}
+                >
+                  {deleteIconElement}
+                </div>
+              </div>
+            );
+          })}
+      </form>
+      {!showStepForm && (
+        <div className="text-right">
+          <Button
+            type="button"
+            text="+ Add a step"
+            onClick={() => {
+              setShowStepForm(true);
+            }}
+          />
+        </div>
+      )}
+      {showStepForm && (
+        <div className="flex justify-end">
+          <div className="pr-3">
+            <Button
+              type="button"
+              text="+ Add a step"
+              onClick={(e) => {
+                handleAddStep(e, "add");
+              }}
+            />
+          </div>
+          <Button
+            type="button"
+            text="Save"
+            bgColor="green-400"
+          />
+        </div>
+      )}
     </div>
   );
 }

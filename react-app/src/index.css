@@ -19,26 +19,26 @@ html {
 
 .ReactModal__Html--open,
 .ReactModal__Body--open {
-  overflow: hidden; /* prevents background page from scrolling when the modal is open */
+  overflow: hidden;
 }
 
 .ReactModal__Content::-webkit-scrollbar {
-  display: none
+  display: none;
 }
 
 .my-masonry-grid {
-  display: -webkit-box; /* Not needed if autoprefixing */
-  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  margin-left: -30px; /* gutter size offset */
+  margin-left: -30px;
   width: auto;
 }
 .my-masonry-grid_column {
-  padding-left: 30px; /* gutter size */
+  padding-left: 30px;
   background-clip: padding-box;
 }
 
 /* Style your items */
-.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+.my-masonry-grid_column > div {
   margin-bottom: 30px;
 }

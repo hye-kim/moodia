@@ -75,6 +75,7 @@ export const changeGoal = (goal) => async (dispatch) => {
   });
 
   if (res.ok) {
+    const goal = await res.json()
     dispatch(addGoal(goal));
   }
 };

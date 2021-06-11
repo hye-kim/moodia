@@ -4,7 +4,7 @@ import moodiaJumbotron from "../../images/moodia-jumbotron.png";
 import { login } from "../../store/session";
 import { useHistory } from "react-router";
 
-function Jumbotron() {
+function Jumbotron({ user }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -23,12 +23,14 @@ function Jumbotron() {
         A site to visualize your mood, record your goals, and track your habits.
       </h2>
       <div className="mt-6">
-        <button
-          onClick={handleDemo}
-          className="transition duration-200 mr-2 md:mr-10 px-3 py-1.5 md:px-6 md:py-3 rounded-3xl bg-highlight text-white hover:opacity-50 focus:outline-none"
-        >
-          Demo Login
-        </button>
+        {!user && (
+          <button
+            onClick={handleDemo}
+            className="transition duration-200 mr-2 md:mr-10 px-3 py-1.5 md:px-6 md:py-3 rounded-3xl bg-highlight text-white hover:opacity-50 focus:outline-none"
+          >
+            Demo Login
+          </button>
+        )}
       </div>
     </div>
   );
