@@ -4,6 +4,7 @@ import LandingCard from "./LandingCard";
 import LandingNavBar from "./LandingNavBar";
 import moodImg from "../../images/landing-mood.png";
 import habitImg from "../../images/landing-habits.png";
+import Footer from "../Footer/Footer";
 
 function LandingPage({ user }) {
   return (
@@ -41,6 +42,7 @@ function LandingPage({ user }) {
           }
         ></LandingCard>
       </section>
+      <Footer />
     </div>
   );
 }

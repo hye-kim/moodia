@@ -15,6 +15,7 @@ import GoalPage from "./components/GoalPage/GoalPage";
 import ObservationPage from "./components/ObservationPage/ObservationPage";
 import DashboardPage from "./components/DashboardPage/DashboardPage";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -74,6 +75,7 @@ function App() {
               </Switch>
             </div>
           </div>
+          <Footer />
         </ProtectedRoute>
         <Route path="/" exact={true}>
           <LandingPage user={user} />

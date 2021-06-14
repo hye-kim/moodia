@@ -7,11 +7,10 @@ function NotFoundPage({ user }) {
       <div className="h-full flex flex-auto flex-nowrap overflow-auto justify-center items-center">
         <div className="relative">
           <img
-            src="https://stickershop.line-scdn.net/stickershop/v1/sticker/177350866/android/sticker.png;compress=true"
+            src="https://moodia.s3.amazonaws.com/43d6b27ccf7d46e4a256df6fa5b0c32c.png"
             alt="cow"
           />
         </div>
-        {/* change css for below div */}
         <div className="pl-4">
           <div className="max-w-lg">
             <div
