@@ -40,9 +40,20 @@ def create_habit_completion(id):
     return habit.to_dict()
 
 
+@habit_routes.route("/<int:id>", methods=["PUT"])
+@login_required
+def edit_habit(id):
+    data = request.json
+    habit = Habit.query.get(id)
+    habit.title = data["title"]
+    db.session.add(habit)
+    db.session.commit()
+    return habit.to_dict()
+
+
 @habit_routes.route("/<int:id>/completions/<int:completion_id>", methods=["PUT"])
 @login_required
-def edit_habit(id, completion_id):
+def edit_habit_completion(id, completion_id):
     data = request.json
     habit_completion = Habit_Completion.query.get(completion_id)
     db.session.delete(habit_completion)
