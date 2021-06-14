@@ -76,7 +76,6 @@ function App() {
               </Switch>
             </div>
           </div>
-          <Footer />
         </ProtectedRoute>
         <Route path="/" exact={true}>
           <LandingPage user={user} />

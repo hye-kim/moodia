@@ -1,11 +1,28 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { createHabit } from "../../store/habit";
 import Button from "../Elements/Button";
 
-function HabitForm() {
+function HabitForm({ user }) {
+  const dispatch = useDispatch();
+
   const [body, setBody] = useState("");
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const habit = {
+      title: body,
+      userId: user.id,
+    };
+    dispatch(createHabit(habit));
+    setBody("")
+  };
+
   return (
-    <form className="flex flex-col w-full mb-3 p-5 rounded-xl shadow-md bg-white">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col w-full mb-3 p-5 rounded-xl shadow-md bg-white"
+    >
       <label
         htmlFor="add-habit"
         className="w-full p-2 rounded-md font-semibold text-md text-highlight"

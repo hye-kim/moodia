@@ -4,12 +4,14 @@ import session from "./session";
 import moods from "./mood";
 import observations from "./observation";
 import goals from "./goal";
+import habits from "./habit"
 
 const rootReducer = combineReducers({
   session,
   moods,
   observations,
   goals,
+  habits,
 });
 
 let enhancer;

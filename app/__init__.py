@@ -12,6 +12,7 @@ from .api.mood_routes import mood_routes
 from .api.image_routes import image_routes
 from .api.observation_routes import observation_routes
 from .api.goal_routes import goal_routes
+from .api.habit_routes import habit_routes
 
 from .seeds import seed_commands
 
@@ -39,6 +40,7 @@ app.register_blueprint(mood_routes, url_prefix="/api/moods")
 app.register_blueprint(image_routes, url_prefix="/api/images")
 app.register_blueprint(observation_routes, url_prefix="/api/observations")
 app.register_blueprint(goal_routes, url_prefix="/api/goals")
+app.register_blueprint(habit_routes, url_prefix="/api/habits")
 db.init_app(app)
 Migrate(app, db)
 
