@@ -7,15 +7,18 @@ function HabitForm({ user }) {
   const dispatch = useDispatch();
 
   const [body, setBody] = useState("");
+  const [time, setTime] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const habit = {
       title: body,
+      time: time,
       userId: user.id,
     };
     dispatch(createHabit(habit));
-    setBody("")
+    setBody("");
+    setTime("");
   };
 
   return (
@@ -35,6 +38,19 @@ function HabitForm({ user }) {
         placeholder="Add item: "
         value={body}
         onChange={(e) => setBody(e.target.value)}
+        className="transition duration-300 p-1 my-2 bg-white border-b border-gray-400 focus:border-highlight focus:outline-none"
+      ></input>
+      <label
+        htmlFor="deadline"
+        className="w-full p-2 mt-10 rounded-md font-semibold text-md text-highlight"
+      >
+        Enter a deadline:{" "}
+      </label>
+      <input
+        type="time"
+        name="deadline"
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
         className="transition duration-300 p-1 my-2 bg-white border-b border-gray-400 focus:border-highlight focus:outline-none"
       ></input>
       <div className="flex mt-4 w-full">

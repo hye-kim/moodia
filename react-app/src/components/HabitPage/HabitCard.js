@@ -21,6 +21,30 @@ function HabitCard({ habit }) {
     date.getDate()
   );
 
+  const formatTime = (timeStr) => {
+    let hours = Number(habit.time.split(":")[0]);
+    const minutes = Number(habit.time.split(":")[1]);
+    if (hours === 0) hours = 12;
+
+    return `${hours > 12 ? hours - 12 : hours}:${
+      minutes < 10 ? `0${minutes}` : minutes
+    } ${hours > 12 ? "PM" : "AM"}`;
+  };
+
+  const changeTimeColor = (timeStr) => {
+    const hours = Number(habit.time.split(":")[0]);
+    const minutes = Number(habit.time.split(":")[1]);
+    const diff =
+      (hours === 0 ? 12 : hours) * 60 +
+      minutes -
+      (date.getHours() * 60 + date.getMinutes());
+
+    if (diff > 120) return "text-green-500";
+    else if (diff > 60) return "text-yellow-300";
+    else if (diff > 0) return "text-yellow-500";
+    return "text-red-500";
+  };
+
   const handleDelete = (e) => {
     e.preventDefault();
     dispatch(removeHabit(habit));
@@ -77,12 +101,13 @@ function HabitCard({ habit }) {
           <p
             onClick={handleCompletion}
             className={`transition duration-200 cursor-pointer p-3 rounded-lg text-lg overflow-ellipsis overflow-hidden ${
-              habit.habit_completions[dateNoTime.toUTCString()]?.completed === true
+              habit.habit_completions[dateNoTime.toUTCString()]?.completed ===
+              true
                 ? "line-through text-gray-300"
-                : "text-green-500"
+                : changeTimeColor(habit.time)
             }`}
           >
-            {habit.title}
+            {`${habit.title} (By ${formatTime(habit.time)})`}
           </p>
           <div className="flex">
             <div className="px-1.5" onClick={() => setShowEdit(true)}>

@@ -34,6 +34,7 @@ export const createHabit = (habit) => async (dispatch) => {
     },
     body: JSON.stringify({
       title: habit.title,
+      time: habit.time,
       user_id: habit.userId,
     }),
   });

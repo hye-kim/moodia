@@ -17,7 +17,7 @@ def get_habits():
 def create_habit():
     data = request.json
 
-    habit = Habit(title=data["title"], user_id=data["user_id"])
+    habit = Habit(title=data["title"], time=data["time"], user_id=data["user_id"])
 
     db.session.add(habit)
     db.session.commit()
