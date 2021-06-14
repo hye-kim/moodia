@@ -28,7 +28,7 @@ function HabitCard({ habit }) {
 
     return `${hours > 12 ? hours - 12 : hours}:${
       minutes < 10 ? `0${minutes}` : minutes
-    } ${hours > 12 ? "PM" : "AM"}`;
+    } ${hours >= 12 ? "PM" : "AM"}`;
   };
 
   const changeTimeColor = (timeStr) => {

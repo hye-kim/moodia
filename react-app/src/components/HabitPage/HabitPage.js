@@ -9,6 +9,11 @@ import HabitForm from "./HabitForm";
 function HabitPage({ user }) {
   const dispatch = useDispatch();
   const habits = useSelector((state) => state.habits);
+  const sortedHabits = Object.values(habits).sort(
+    (a, b) =>
+      Number(a.time.split(":")[0]) - Number(b.time.split(":")[0]) ||
+      Number(a.time.split(":")[1]) - Number(b.time.split(":")[1])
+  );
 
   useEffect(() => {
     dispatch(fetchHabits());
@@ -19,7 +24,7 @@ function HabitPage({ user }) {
       <PageHeading title="Habits" />
       <div className="flex flex-row mt-5">
         <div className="flex flex-col w-1/2">
-          {Object.values(habits).map((habit) => {
+          {sortedHabits.map((habit) => {
             return (
               <Zoom key={habit.id} duration={500}>
                 <HabitCard habit={habit} />
