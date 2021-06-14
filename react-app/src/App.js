@@ -16,6 +16,7 @@ import ObservationPage from "./components/ObservationPage/ObservationPage";
 import DashboardPage from "./components/DashboardPage/DashboardPage";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 import Footer from "./components/Footer/Footer";
+import HabitPage from "./components/HabitPage/HabitPage";
 
 function App() {
   const user = useSelector((state) => state.session.user);
@@ -64,7 +65,7 @@ function App() {
                   <GoalPage user={user} />
                 </ProtectedRoute>
                 <ProtectedRoute path="/dashboard/habits" exact={true}>
-                  <div>Hello</div>
+                  <HabitPage user={user} />
                 </ProtectedRoute>
                 <ProtectedRoute path="/dashboard/observations" exact={true}>
                   <ObservationPage user={user} />
