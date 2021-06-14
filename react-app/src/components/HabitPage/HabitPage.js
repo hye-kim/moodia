@@ -15,7 +15,7 @@ function HabitPage({ user }) {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-col w-full md:py-6">
+    <div className="flex flex-col md:justify-between w-full md:my-6 md:ml-5">
       <PageHeading title="Habits" />
       <div className="flex flex-row mt-5">
         <div className="flex flex-col w-1/2">
@@ -26,9 +26,6 @@ function HabitPage({ user }) {
               </Zoom>
             );
           })}
-          {/* <Zoom duration={500}>
-            <HabitCard />
-          </Zoom> */}
         </div>
         <div className="ml-10 mt-2 w-2/5">
           <Zoom duration={500}>

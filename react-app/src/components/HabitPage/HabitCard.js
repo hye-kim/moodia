@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { changeHabit, removeHabit } from "../../store/habit";
+import {
+  changeHabit,
+  changeHabitCompletion,
+  createHabitCompletion,
+  removeHabit,
+} from "../../store/habit";
 import Button from "../Elements/Button";
 import { deleteIconElement, editIconElement } from "../Icons/Icons";
 
@@ -8,6 +13,13 @@ function HabitCard({ habit }) {
   const dispatch = useDispatch();
   const [body, setBody] = useState(habit.title);
   const [showEdit, setShowEdit] = useState(false);
+
+  const date = new Date();
+  const dateNoTime = new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -22,8 +34,28 @@ function HabitCard({ habit }) {
     setShowEdit(false);
   };
 
+  const handleCompletion = (e) => {
+    e.preventDefault();
+    const newHabit = { ...habit };
+
+    newHabit["date"] = dateNoTime;
+    if (
+      Object.keys(newHabit["habit_completions"]).includes(
+        dateNoTime.toUTCString()
+      )
+    ) {
+      newHabit["completed"] = false;
+      newHabit["completionId"] =
+        newHabit["habit_completions"][dateNoTime.toUTCString()].id;
+      dispatch(changeHabitCompletion(newHabit));
+    } else {
+      newHabit["completed"] = true;
+      dispatch(createHabitCompletion(newHabit));
+    }
+  };
+
   return (
-    <div class="flex justify-between items-center w-full my-3 p-3 rounded-xl shadow-sm bg-white">
+    <div className="flex justify-between items-center w-full my-3 p-3 rounded-xl shadow-sm bg-white">
       {showEdit && (
         <form
           onSubmit={handleEdit}
@@ -42,7 +74,14 @@ function HabitCard({ habit }) {
       )}
       {!showEdit && (
         <>
-          <p class="transition duration-200 cursor-pointer p-3 rounded-lg text-lg text-green-500 overflow-ellipsis overflow-hidden">
+          <p
+            onClick={handleCompletion}
+            className={`transition duration-200 cursor-pointer p-3 rounded-lg text-lg overflow-ellipsis overflow-hidden ${
+              habit.habit_completions[dateNoTime.toUTCString()]?.completed === true
+                ? "line-through text-gray-300"
+                : "text-green-500"
+            }`}
+          >
             {habit.title}
           </p>
           <div className="flex">

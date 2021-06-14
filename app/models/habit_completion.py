@@ -14,6 +14,7 @@ class Habit_Completion(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "title": self.title,
-            "user_id": self.user_id,
+            "completed": self.completed,
+            "date": self.date,
+            "habit_id": self.habit_id,
         }

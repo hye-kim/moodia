@@ -15,7 +15,6 @@ import GoalPage from "./components/GoalPage/GoalPage";
 import ObservationPage from "./components/ObservationPage/ObservationPage";
 import DashboardPage from "./components/DashboardPage/DashboardPage";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
-import Footer from "./components/Footer/Footer";
 import HabitPage from "./components/HabitPage/HabitPage";
 
 function App() {

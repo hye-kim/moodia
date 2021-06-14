@@ -71,6 +71,41 @@ export const removeHabit = (habit) => async (dispatch) => {
   }
 };
 
+export const createHabitCompletion = (habit) => async (dispatch) => {
+  const res = await fetch(`/api/habits/${habit.id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      completed: habit.completed,
+      date: habit.date,
+    }),
+  });
+
+  if (res.ok) {
+    const habit = await res.json();
+    dispatch(addHabit(habit));
+  }
+};
+
+export const changeHabitCompletion = (habit) => async (dispatch) => {
+  const res = await fetch(`/api/habits/${habit.id}/completions/${habit.completionId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      completed: habit.completed,
+    }),
+  });
+
+  if (res.ok) {
+    const habit = await res.json();
+    dispatch(addHabit(habit));
+  }
+};
+
 const initialState = {};
 
 export default function habitReducer(state = initialState, { type, payload }) {
@@ -78,6 +113,11 @@ export default function habitReducer(state = initialState, { type, payload }) {
     case GET_HABITS: {
       const newState = {};
       payload.forEach((habit) => {
+        const newCompletions = {};
+        habit.habit_completions.forEach((completion) => {
+          newCompletions[completion.date] = completion;
+        });
+        habit.habit_completions = newCompletions;
         newState[habit.id] = habit;
       });
       return newState;
@@ -85,6 +125,11 @@ export default function habitReducer(state = initialState, { type, payload }) {
 
     case ADD_HABIT: {
       const newState = { ...state };
+      const newCompletions = {};
+      payload.habit_completions.forEach((completion) => {
+        newCompletions[completion.date] = completion;
+      });
+      payload.habit_completions = newCompletions;
       newState[payload.id] = payload;
       return newState;
     }
