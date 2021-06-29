@@ -91,15 +91,18 @@ export const createHabitCompletion = (habit) => async (dispatch) => {
 };
 
 export const changeHabitCompletion = (habit) => async (dispatch) => {
-  const res = await fetch(`/api/habits/${habit.id}/completions/${habit.completionId}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      completed: habit.completed,
-    }),
-  });
+  const res = await fetch(
+    `/api/habits/${habit.id}/completions/${habit.completionId}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        completed: habit.completed,
+      }),
+    }
+  );
 
   if (res.ok) {
     const habit = await res.json();
